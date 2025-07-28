@@ -1,0 +1,123 @@
+{
+  "timestamp": "2025-07-28T19:57:27.291919",
+  "subset_size": 50000,
+  "full_dataset_size": 439091,
+  "best_accuracy": 0.0,
+  "total_configs": 6,
+  "results": [
+    {
+      "config_id": 1,
+      "validation_accuracy": 0.0,
+      "error": "'ModelEvaluator' object has no attribute 'evaluate_data_loader'",
+      "config": {
+        "model_type": "baseline",
+        "hidden_dim": 128,
+        "dropout_rate": 0.3,
+        "learning_rate": 0.001,
+        "optimizer_type": "adam",
+        "scheduler_type": "plateau",
+        "batch_size": 64,
+        "num_epochs": 30,
+        "early_stopping_patience": 8
+      }
+    },
+    {
+      "config_id": 2,
+      "validation_accuracy": 0.0,
+      "error": "'ModelEvaluator' object has no attribute 'evaluate_data_loader'",
+      "config": {
+        "model_type": "baseline",
+        "hidden_dim": 256,
+        "dropout_rate": 0.2,
+        "learning_rate": 0.0005,
+        "optimizer_type": "adam",
+        "scheduler_type": "plateau",
+        "batch_size": 64,
+        "num_epochs": 30,
+        "early_stopping_patience": 8
+      }
+    },
+    {
+      "config_id": 3,
+      "validation_accuracy": 0.0,
+      "error": "'ModelEvaluator' object has no attribute 'evaluate_data_loader'",
+      "config": {
+        "model_type": "baseline",
+        "hidden_dim": 128,
+        "dropout_rate": 0.3,
+        "learning_rate": 0.001,
+        "optimizer_type": "adamw",
+        "scheduler_type": "cosine",
+        "batch_size": 64,
+        "num_epochs": 30,
+        "early_stopping_patience": 8
+      }
+    },
+    {
+      "config_id": 4,
+      "validation_accuracy": 0.0,
+      "error": "'ModelEvaluator' object has no attribute 'evaluate_data_loader'",
+      "config": {
+        "model_type": "optimized",
+        "hidden_dims": [
+          256,
+          128,
+          64
+        ],
+        "dropout_rate": 0.2,
+        "use_batch_norm": true,
+        "use_residual": true,
+        "learning_rate": 0.0005,
+        "optimizer_type": "adamw",
+        "scheduler_type": "cosine",
+        "batch_size": 64,
+        "num_epochs": 30,
+        "early_stopping_patience": 8
+      }
+    },
+    {
+      "config_id": 5,
+      "validation_accuracy": 0.0,
+      "error": "'ModelEvaluator' object has no attribute 'evaluate_data_loader'",
+      "config": {
+        "model_type": "deep",
+        "hidden_dims": [
+          256,
+          128,
+          64,
+          32,
+          16
+        ],
+        "dropout_rate": 0.3,
+        "use_batch_norm": true,
+        "learning_rate": 0.001,
+        "optimizer_type": "adam",
+        "scheduler_type": "plateau",
+        "batch_size": 64,
+        "num_epochs": 30,
+        "early_stopping_patience": 8
+      }
+    },
+    {
+      "config_id": 6,
+      "validation_accuracy": 0.0,
+      "error": "'ModelEvaluator' object has no attribute 'evaluate_data_loader'",
+      "config": {
+        "model_type": "wide",
+        "hidden_dims": [
+          512,
+          256
+        ],
+        "dropout_rate": 0.4,
+        "use_batch_norm": true,
+        "learning_rate": 0.001,
+        "optimizer_type": "adam",
+        "scheduler_type": "plateau",
+        "batch_size": 64,
+        "num_epochs": 30,
+        "early_stopping_patience": 8
+      }
+    }
+  ],
+  "best_config": null
+}

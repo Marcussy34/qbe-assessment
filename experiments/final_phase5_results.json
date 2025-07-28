@@ -1,0 +1,123 @@
+{
+  "timestamp": "2025-07-28T19:58:51.240319",
+  "subset_size": 30000,
+  "best_accuracy": 0.5796666666666667,
+  "results": [
+    {
+      "config_id": 2,
+      "model_type": "baseline",
+      "validation_accuracy": 0.5796666666666667,
+      "validation_f1": 0.6099597896690381,
+      "final_train_acc": 57.708333333333336,
+      "final_val_acc": 57.96666666666667,
+      "epochs_trained": 15,
+      "training_time": 7.895903,
+      "parameters": 36865,
+      "config": {
+        "model_type": "baseline",
+        "hidden_dim": 256,
+        "dropout_rate": 0.2,
+        "learning_rate": 0.0005,
+        "optimizer_type": "adam",
+        "scheduler_type": "plateau",
+        "batch_size": 64,
+        "num_epochs": 20,
+        "early_stopping_patience": 5
+      }
+    },
+    {
+      "config_id": 4,
+      "model_type": "optimized",
+      "validation_accuracy": 0.5756666666666667,
+      "validation_f1": 0.6265767087122324,
+      "final_train_acc": 55.9375,
+      "final_val_acc": 57.56666666666667,
+      "epochs_trained": 20,
+      "training_time": 15.648437,
+      "parameters": 45953,
+      "config": {
+        "model_type": "optimized",
+        "hidden_dims": [
+          256,
+          128,
+          64
+        ],
+        "dropout_rate": 0.2,
+        "use_batch_norm": true,
+        "use_residual": true,
+        "learning_rate": 0.0005,
+        "optimizer_type": "adamw",
+        "scheduler_type": "cosine",
+        "batch_size": 64,
+        "num_epochs": 20,
+        "early_stopping_patience": 5
+      }
+    },
+    {
+      "config_id": 1,
+      "model_type": "baseline",
+      "validation_accuracy": 0.5745,
+      "validation_f1": 0.5994037345049427,
+      "final_train_acc": 57.44583333333333,
+      "final_val_acc": 57.45,
+      "epochs_trained": 20,
+      "training_time": 8.512335,
+      "parameters": 10241,
+      "config": {
+        "model_type": "baseline",
+        "hidden_dim": 128,
+        "dropout_rate": 0.3,
+        "learning_rate": 0.001,
+        "optimizer_type": "adam",
+        "scheduler_type": "plateau",
+        "batch_size": 64,
+        "num_epochs": 20,
+        "early_stopping_patience": 5
+      }
+    },
+    {
+      "config_id": 3,
+      "model_type": "baseline",
+      "validation_accuracy": 0.5676666666666667,
+      "validation_f1": 0.5852254557083466,
+      "final_train_acc": 56.833333333333336,
+      "final_val_acc": 56.766666666666666,
+      "epochs_trained": 15,
+      "training_time": 6.824452,
+      "parameters": 10241,
+      "config": {
+        "model_type": "baseline",
+        "hidden_dim": 128,
+        "dropout_rate": 0.3,
+        "learning_rate": 0.001,
+        "optimizer_type": "adamw",
+        "scheduler_type": "cosine",
+        "batch_size": 64,
+        "num_epochs": 20,
+        "early_stopping_patience": 5
+      }
+    }
+  ],
+  "best_config": {
+    "config_id": 2,
+    "model_type": "baseline",
+    "validation_accuracy": 0.5796666666666667,
+    "validation_f1": 0.6099597896690381,
+    "final_train_acc": 57.708333333333336,
+    "final_val_acc": 57.96666666666667,
+    "epochs_trained": 15,
+    "training_time": 7.895903,
+    "parameters": 36865,
+    "config": {
+      "model_type": "baseline",
+      "hidden_dim": 256,
+      "dropout_rate": 0.2,
+      "learning_rate": 0.0005,
+      "optimizer_type": "adam",
+      "scheduler_type": "plateau",
+      "batch_size": 64,
+      "num_epochs": 20,
+      "early_stopping_patience": 5
+    }
+  }
+}
