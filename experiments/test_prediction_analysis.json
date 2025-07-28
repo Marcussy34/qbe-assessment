@@ -1,0 +1,30 @@
+{
+  "timestamp": "2025-07-28T20:10:15.377457",
+  "test_samples": 13580,
+  "model_config": {
+    "model_type": "baseline",
+    "hidden_dim": 256,
+    "dropout_rate": 0.2,
+    "parameters": 36865
+  },
+  "prediction_statistics": {
+    "mean": 0.4732183814048767,
+    "std": 0.17097347974777222,
+    "min": 0.12911032140254974,
+    "max": 0.7912741303443909
+  },
+  "confidence_distribution": {
+    "high_confidence_count": 0,
+    "medium_confidence_count": 10232,
+    "low_confidence_count": 3348,
+    "high_confidence_pct": 0.0,
+    "medium_confidence_pct": 75.34609720176731,
+    "low_confidence_pct": 24.653902798232696
+  },
+  "binary_distribution": {
+    "positive_count": 7300,
+    "negative_count": 6280,
+    "positive_pct": 53.75552282768778,
+    "negative_pct": 46.24447717231222
+  }
+}
