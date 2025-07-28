@@ -17,10 +17,9 @@ from pathlib import Path
 # Add src to path for imports
 sys.path.append('src')
 
-from data_loader import DataLoader
-from preprocessor import FeaturePreprocessor
+from data_loader import load_pickle_data
+from preprocessor import DataPreprocessor
 from ensemble import EnsembleManager, SimpleEnsemble, StackingEnsemble
-from evaluate import calculate_metrics
 import pickle
 
 def load_existing_models():
@@ -61,7 +60,9 @@ def create_diverse_models():
     
     # Import required modules
     from model import BaselineNet, OptimizedNet
-    from train import ModelTrainer
+    from torch.utils.data import TensorDataset, DataLoader
+    import torch.optim as optim
+    import torch.nn as nn
     
     # Load data
     print("📊 Loading training data...")
@@ -74,8 +75,8 @@ def create_diverse_models():
         preprocessor = pickle.load(f)
     
     # Prepare data
-    X_train = preprocessor.transform(train_data.drop('target', axis=1))
-    y_train = train_data['target'].values
+    X_train = preprocessor.transform(train_data.drop('is_correct', axis=1))
+    y_train = train_data['is_correct'].values.astype(float)
     
     # Split for training/validation
     from sklearn.model_selection import train_test_split
@@ -89,14 +90,36 @@ def create_diverse_models():
     X_val_tensor = torch.FloatTensor(X_val_split)
     y_val_tensor = torch.FloatTensor(y_val_split)
     
+    # Create data loaders
+    train_dataset = TensorDataset(X_train_tensor, y_train_tensor)
+    val_dataset = TensorDataset(X_val_tensor, y_val_tensor)
+    train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=64, shuffle=False)
+    
+    device = torch.device('cpu')  # Use CPU for consistency
     diverse_models = []
     
-    # Model 1: Baseline with different hidden size
+    # Model 1: Different baseline architecture
     print("🔨 Training diverse baseline model...")
-    model1 = BaselineNet(input_dim=14, hidden_dim=128)  # Smaller hidden dim
-    trainer1 = ModelTrainer(model1, learning_rate=0.001, scheduler_type='plateau')
-    trainer1.train(X_train_tensor, y_train_tensor, X_val_tensor, y_val_tensor, 
-                   epochs=50, batch_size=32)
+    model1 = BaselineNet(input_dim=14, hidden_dim=128)
+    
+    # Simple training loop for model1
+    optimizer1 = optim.Adam(model1.parameters(), lr=0.001)
+    criterion = nn.BCELoss()
+    
+    model1.train()
+    for epoch in range(20):  # Fewer epochs for speed
+        total_loss = 0
+        for batch_X, batch_y in train_loader:
+            optimizer1.zero_grad()
+            outputs = model1(batch_X).squeeze()
+            loss = criterion(outputs, batch_y)
+            loss.backward()
+            optimizer1.step()
+            total_loss += loss.item()
+        
+        if epoch % 5 == 0:
+            print(f"  Epoch {epoch}, Loss: {total_loss/len(train_loader):.4f}")
     
     model1_path = 'models/ensemble_baseline_128.pth'
     torch.save(model1.state_dict(), model1_path)
@@ -106,9 +129,23 @@ def create_diverse_models():
     # Model 2: Optimized with different dropout
     print("🔨 Training diverse optimized model...")
     model2 = OptimizedNet(input_dim=14, hidden_dims=[256, 128, 64], dropout_rate=0.3)
-    trainer2 = ModelTrainer(model2, learning_rate=0.0005, scheduler_type='step')
-    trainer2.train(X_train_tensor, y_train_tensor, X_val_tensor, y_val_tensor,
-                   epochs=50, batch_size=64)
+    
+    # Simple training loop for model2
+    optimizer2 = optim.Adam(model2.parameters(), lr=0.0005)
+    
+    model2.train()
+    for epoch in range(20):  # Fewer epochs for speed
+        total_loss = 0
+        for batch_X, batch_y in train_loader:
+            optimizer2.zero_grad()
+            outputs = model2(batch_X).squeeze()
+            loss = criterion(outputs, batch_y)
+            loss.backward()
+            optimizer2.step()
+            total_loss += loss.item()
+        
+        if epoch % 5 == 0:
+            print(f"  Epoch {epoch}, Loss: {total_loss/len(train_loader):.4f}")
     
     model2_path = 'models/ensemble_optimized_high_dropout.pth'
     torch.save(model2.state_dict(), model2_path)
@@ -118,9 +155,23 @@ def create_diverse_models():
     # Model 3: Wide network with different learning rate
     print("🔨 Training diverse wide model...")
     model3 = BaselineNet(input_dim=14, hidden_dim=512)  # Wider network
-    trainer3 = ModelTrainer(model3, learning_rate=0.0001, scheduler_type='cosine')  # Lower LR
-    trainer3.train(X_train_tensor, y_train_tensor, X_val_tensor, y_val_tensor,
-                   epochs=50, batch_size=128)
+    
+    # Simple training loop for model3
+    optimizer3 = optim.Adam(model3.parameters(), lr=0.0001)  # Lower LR
+    
+    model3.train()
+    for epoch in range(20):  # Fewer epochs for speed
+        total_loss = 0
+        for batch_X, batch_y in train_loader:
+            optimizer3.zero_grad()
+            outputs = model3(batch_X).squeeze()
+            loss = criterion(outputs, batch_y)
+            loss.backward()
+            optimizer3.step()
+            total_loss += loss.item()
+        
+        if epoch % 5 == 0:
+            print(f"  Epoch {epoch}, Loss: {total_loss/len(train_loader):.4f}")
     
     model3_path = 'models/ensemble_wide_512.pth'
     torch.save(model3.state_dict(), model3_path)
@@ -165,8 +216,8 @@ def train_ensemble_models():
             preprocessor = pickle.load(f)
         
         # Prepare data
-        X_train = preprocessor.transform(train_data.drop('target', axis=1))
-        y_train = train_data['target'].values
+        X_train = preprocessor.transform(train_data.drop('is_correct', axis=1))
+        y_train = train_data['is_correct'].values
         
         # Split for ensemble training/validation
         from sklearn.model_selection import train_test_split

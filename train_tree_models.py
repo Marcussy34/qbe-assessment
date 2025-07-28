@@ -38,8 +38,8 @@ def prepare_data():
         preprocessor = pickle.load(f)
     
     # Prepare training data
-    X_train_full = preprocessor.transform(train_data.drop('target', axis=1))
-    y_train_full = train_data['target'].values
+    X_train_full = preprocessor.transform(train_data.drop('is_correct', axis=1))
+    y_train_full = train_data['is_correct'].values.astype(int)
     
     # Split for training/validation (80/20 split for tree models)
     from sklearn.model_selection import train_test_split
@@ -54,10 +54,10 @@ def prepare_data():
     X_test = preprocessor.transform(test_data)
     
     print(f"✅ Data prepared:")
-    print(f"  🔹 Training set: {X_train.shape[0]:,} samples")
-    print(f"  🔹 Validation set: {X_val.shape[0]:,} samples")
-    print(f"  🔹 Test set: {X_test.shape[0]:,} samples")
-    print(f"  🔹 Features: {X_train.shape[1]} features")
+    print(f"  📈 Training: {X_train.shape[0]:,} samples")
+    print(f"  📊 Validation: {X_val.shape[0]:,} samples") 
+    print(f"  🧪 Test: {X_test.shape[0]:,} samples")
+    print(f"  🔢 Features: {X_train.shape[1]} features")
     
     return X_train, X_val, y_train, y_val, X_test, preprocessor
 

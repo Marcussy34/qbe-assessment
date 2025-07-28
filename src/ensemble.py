@@ -216,7 +216,7 @@ class EnsembleManager:
     
     def _load_models(self):
         """Load all models from file paths"""
-        from .model import BaselineNet  # Import model architecture
+        from model import BaselineNet  # Import model architecture
         
         for path in self.model_paths:
             if Path(path).exists():
