@@ -1,0 +1,9 @@
+=== PREPROCESSING PIPELINE TEST RESULTS ===
+
+Input data shape: (439091, 11)
+Processed feature shape: (439091, 14)
+Number of engineered features: 14
+Feature columns: ['feature1_encoded', 'feature4_normalized', 'feature2', 'feature3', 'feature5', 'answer_position_ratio', 'is_first_choice', 'is_last_choice', 'is_middle_choice', 'feature2_answer_interaction', 'feature3_answer_interaction', 'feature5_answer_interaction', 'has_many_choices', 'is_binary_question']
+Train/val split: 351272/87819
+Data quality: No NaN or infinite values
+All tests: PASSED
