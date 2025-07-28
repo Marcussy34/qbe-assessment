@@ -1,0 +1,32 @@
+=== User Answer Feature Analysis ===
+
+Feature1 unique values: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+Feature1 appears to be user's selected answer (a, b, c, d, etc.)
+
+Accuracy by answer choice:
+          total_answers  correct_answers  accuracy_rate
+feature1                                               
+a                 55130            28226         0.5120
+b                 54690            27833         0.5089
+c                 54834            28045         0.5115
+d                 54600            27906         0.5111
+e                 55304            28191         0.5097
+f                 54498            27855         0.5111
+g                 54599            28111         0.5149
+h                 55436            28434         0.5129
+
+Feature4 analysis:
+Unique values: [1, 2, 3, 4, 5, 6, 7]
+Feature4 likely represents number of answer choices in question
+
+Feature1 vs Feature4 relationship:
+feature4     1     2     3     4      5     6     7
+feature1                                           
+a         3787  6972  5470  4935  25679  4842  3445
+b         3798  7012  5326  4857  25326  4991  3380
+c         3803  6763  5504  4640  25885  4772  3467
+d         3729  6991  5302  4618  25540  4961  3459
+e         3801  7180  5402  4732  25960  4739  3490
+f         3654  6920  5586  4828  25339  4694  3477
+g         3771  6951  5567  4733  25302  4844  3431
+h         3649  6957  5465  4881  25996  4929  3559
